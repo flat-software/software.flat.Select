@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Select for Figma
+Comment=Unofficial desktop application for linux
+Exec=software.flat.Select
+Type=Application
+Icon=software.flat.Select
+StartupWMClass=Select
+MimeType=application/figma;x-scheme-handler/figma;
+Categories=Graphics;

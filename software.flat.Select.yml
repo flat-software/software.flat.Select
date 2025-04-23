@@ -1,0 +1,60 @@
+app-id: software.flat.Select
+runtime: org.freedesktop.Platform
+runtime-version: "24.08"
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: "24.08"
+command: software.flat.Select
+finish-args:
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --filesystem=xdg-pictures
+  - --share=network
+  - --talk-name=org.freedesktop.portal.Desktop
+  - --talk-name=org.freedesktop.Notifications
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
+  - --env=ELECTRON_TRASH=gio
+modules:
+  - name: select
+    buildsystem: simple
+    build-commands:
+      - ar x select.deb
+      - rm select.deb
+      - tar xf data.tar.xz
+      - cp -r opt/figma-linux /app/select
+
+      - |
+        for s in 16 24 36 48 64 72 96 128 192 256 384 512; do
+          install -Dm644 icons/${s}x${s}.png /app/share/icons/hicolor/${s}x${s}/apps/${FLATPAK_ID}.png
+        done
+      - install -Dm644 icons/scalable.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm644 icons/symbolic.png /app/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}.png
+
+      - install -Dm644 software.flat.Select.desktop -t /app/share/applications
+      - install -Dm644 software.flat.Select.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 select.sh /app/bin/software.flat.Select
+    sources:
+      - type: file
+        dest-filename: select.deb
+        url: https://github.com/Figma-Linux/figma-linux/releases/download/v0.11.5/figma-linux_0.11.5_linux_amd64.deb
+        sha256: ea515e89e7258b2b9376750209b2e9a105a2bb993738f1f16fe545d7b1ad111a
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Figma-Linux/figma-linux/releases/latest
+          version-query: .tag_name | sub("^v"; "")
+          url-query: >
+            .assets[] | select(.name=="figma-linux_" + $version +
+            "_linux_amd64.deb") | .browser_download_url
+
+      - type: file
+        path: software.flat.Select.desktop
+
+      - type: file
+        path: software.flat.Select.metainfo.xml
+
+      - type: file
+        path: select.sh
+
+      - type: dir
+        path: icons

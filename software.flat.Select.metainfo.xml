@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<component type="desktop">
+  <id>software.flat.Select</id>
+  <name>Figma for Linux</name>
+  <developer_name>Chugunov Roman</developer_name>
+  <summary>Web-based collaborative design tool</summary>
+  <url type="homepage">https://github.com/Figma-Linux/figma-linux</url>
+  <url type="bugtracker">https://github.com/Figma-Linux/figma-linux/issues</url>
+  <project_license>GPL-2.0</project_license>
+  <metadata_license>CC0-1.0</metadata_license>
+  <launchable type="desktop-id">software.flat.Select.desktop</launchable>
+  <description>
+    <p>Figma is the first interface design tool based in the browser, making it easier for
+    teams to create software.</p>
+
+    <p>NOTE: This wrapper is not verified by, affiliated with, or
+    supported by Figma, Inc.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/flat-software/software.flat.Select/40e00164a7e0a35f6a365ed926967028e2e25100/screenshots/screenshot1.png</image>
+      <caption>The full power of Figma, now on Linux.</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flat-software/software.flat.Select/40e00164a7e0a35f6a365ed926967028e2e25100/screenshots/screenshot1.png</image>
+      <caption>Customize the interface down to every color.</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flat-software/software.flat.Select/40e00164a7e0a35f6a365ed926967028e2e25100/screenshots/screenshot1.png</image>
+      <caption>Supports display scaling and custom fonts.</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/flat-software/software.flat.Select/40e00164a7e0a35f6a365ed926967028e2e25100/screenshots/screenshot1.png</image>
+      <caption>Built-in themes from the community.</caption>
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.0">
+    <content_attribute id="social-chat">moderate</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+    <content_attribute id="money-purchasing">intense</content_attribute>
+  </content_rating>
+  <releases>
+    <release version="0.11.5" date="2024-10-10" />
+  </releases>
+</component>
