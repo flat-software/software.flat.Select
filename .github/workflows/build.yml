@@ -61,7 +61,6 @@ jobs:
           mv tmp.json ./image/index.json
 
           echo "Get variables."
-          digest=$(regctl image digest artifacts.flat.software/flatpaks/$REPO_NAME_LOWER:latest)
           version=$(xmllint --xpath 'string(//release[1]/@version)' $REPO_NAME.metainfo.xml)
 
           echo "Copy latest."
