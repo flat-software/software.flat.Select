@@ -2,6 +2,8 @@ app-id: software.flat.Select
 runtime: org.freedesktop.Platform
 runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.node22
 base: org.electronjs.Electron2.BaseApp
 base-version: "24.08"
 command: software.flat.Select
@@ -15,6 +17,7 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_TRASH=gio
+  - --env=FIGMA_LOGLEVEL=DEBUG
 modules:
   - name: select
     buildsystem: simple
@@ -24,12 +27,22 @@ modules:
       - tar xf data.tar.xz
       - cp -r opt/figma-linux /app/select
 
+      - rm /app/select/resources/app-update.yml
+      - mv /app/select/figma-linux /app/select/select
+
+      - mkdir asar
+      - /usr/lib/sdk/node22/bin/node node_modules/@electron/asar/bin/asar.js extract /app/select/resources/app.asar asar
+      - sed -i 's|<title>.*</title>|<title>Select</title>|' asar/index.html
+      - rm /app/select/resources/app.asar
+      - /usr/lib/sdk/node22/bin/node node_modules/@electron/asar/bin/asar.js pack asar /app/select/resources/app.asar
+      - patch-desktop-filename /app/select/resources/app.asar
+
       - |
         for s in 16 24 36 48 64 72 96 128 192 256 384 512; do
-          install -Dm644 icons/${s}x${s}.png /app/share/icons/hicolor/${s}x${s}/apps/${FLATPAK_ID}.png
+          install -Dm644 ${s}.png /app/share/icons/hicolor/${s}x${s}/apps/${FLATPAK_ID}.png
         done
-      - install -Dm644 icons/scalable.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-      - install -Dm644 icons/symbolic.png /app/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}.png
+      - install -Dm644 scalable.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -Dm644 symbolic.png /app/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}.png
 
       - install -Dm644 software.flat.Select.desktop -t /app/share/applications
       - install -Dm644 software.flat.Select.metainfo.xml -t /app/share/metainfo
@@ -47,6 +60,10 @@ modules:
             .assets[] | select(.name=="figma-linux_" + $version +
             "_linux_amd64.deb") | .browser_download_url
 
+      - type: archive
+        path: asar.zip
+        strip-components: 0
+
       - type: file
         path: software.flat.Select.desktop
 
@@ -56,5 +73,44 @@ modules:
       - type: file
         path: select.sh
 
-      - type: dir
-        path: icons
+      - type: file
+        path: icons/16.png
+
+      - type: file
+        path: icons/24.png
+
+      - type: file
+        path: icons/36.png
+
+      - type: file
+        path: icons/48.png
+
+      - type: file
+        path: icons/64.png
+
+      - type: file
+        path: icons/72.png
+
+      - type: file
+        path: icons/96.png
+
+      - type: file
+        path: icons/128.png
+
+      - type: file
+        path: icons/192.png
+
+      - type: file
+        path: icons/256.png
+
+      - type: file
+        path: icons/384.png
+
+      - type: file
+        path: icons/512.png
+
+      - type: file
+        path: icons/scalable.svg
+
+      - type: file
+        path: icons/symbolic.png
