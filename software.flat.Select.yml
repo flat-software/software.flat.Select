@@ -7,6 +7,10 @@ sdk-extensions:
 base: org.electronjs.Electron2.BaseApp
 base-version: "24.08"
 command: software.flat.Select
+separate-locales: false
+build-options:
+  append-path: /usr/lib/sdk/node22/bin
+
 finish-args:
   - --socket=x11
   - --socket=pulseaudio
@@ -18,6 +22,7 @@ finish-args:
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_TRASH=gio
   - --env=FIGMA_LOGLEVEL=DEBUG
+
 modules:
   - name: select
     buildsystem: simple
@@ -31,10 +36,10 @@ modules:
       - mv /app/select/figma-linux /app/select/select
 
       - mkdir asar
-      - /usr/lib/sdk/node22/bin/node node_modules/@electron/asar/bin/asar.js extract /app/select/resources/app.asar asar
+      - node node_modules/@electron/asar/bin/asar.js extract /app/select/resources/app.asar asar
       - sed -i 's|<title>.*</title>|<title>Select</title>|' asar/index.html
       - rm /app/select/resources/app.asar
-      - /usr/lib/sdk/node22/bin/node node_modules/@electron/asar/bin/asar.js pack asar /app/select/resources/app.asar
+      - node node_modules/@electron/asar/bin/asar.js pack asar /app/select/resources/app.asar
       - patch-desktop-filename /app/select/resources/app.asar
 
       - |
