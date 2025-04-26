@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<component type="desktop">
+<component type="desktop-application">
   <id>software.flat.Select</id>
   <name>Select</name>
   <developer_name>Chugunov Roman</developer_name>
