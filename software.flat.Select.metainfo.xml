@@ -3,8 +3,10 @@
   <id>software.flat.Select</id>
   <launchable type="desktop-id">software.flat.Select.desktop</launchable>
   <name>Select</name>
-  <developer_name>Chugunov Roman</developer_name>
   <summary>Unofficial desktop client for Figma</summary>
+  <developer id="io.github.chugunovroman">
+    <name>Chugunov Roman</name>
+  </developer>
   <url type="homepage">https://github.com/Figma-Linux/figma-linux</url>
   <url type="bugtracker">https://github.com/Figma-Linux/figma-linux/issues</url>
   <project_license>GPL-2.0</project_license>
