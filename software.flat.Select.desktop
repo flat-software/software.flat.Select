@@ -1,8 +1,8 @@
 [Desktop Entry]
+Type=Application
 Name=Select
 Comment=Unofficial desktop client for Figma
 Exec=software.flat.Select %U
-Type=Application
 Icon=software.flat.Select
 StartupWMClass=Select
 MimeType=application/figma;x-scheme-handler/figma;
