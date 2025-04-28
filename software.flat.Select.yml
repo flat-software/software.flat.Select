@@ -21,7 +21,6 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_TRASH=gio
-  - --env=FIGMA_LOGLEVEL=DEBUG
 
 modules:
   - name: select
@@ -49,9 +48,9 @@ modules:
       - install -Dm644 scalable.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -Dm644 symbolic.png /app/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}.png
 
-      - install -Dm644 software.flat.Select.desktop -t /app/share/applications
-      - install -Dm644 software.flat.Select.metainfo.xml -t /app/share/metainfo
-      - install -Dm755 select.sh /app/bin/software.flat.Select
+      - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
+      - install -Dm755 select.sh /app/bin/${FLATPAK_ID}
     sources:
       - type: file
         dest-filename: select.deb
