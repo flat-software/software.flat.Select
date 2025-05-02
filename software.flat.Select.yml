@@ -8,8 +8,6 @@ base: org.electronjs.Electron2.BaseApp
 base-version: "24.08"
 command: software.flat.Select
 separate-locales: false
-build-options:
-  append-path: /usr/lib/sdk/node22/bin
 
 finish-args:
   - --socket=x11
@@ -21,6 +19,9 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --env=ELECTRON_TRASH=gio
+
+build-options:
+  append-path: /usr/lib/sdk/node22/bin
 
 modules:
   - name: select
