@@ -49,9 +49,9 @@ modules:
       - install -Dm644 scalable.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
       - install -Dm644 symbolic.png /app/share/icons/hicolor/symbolic/apps/${FLATPAK_ID}.png
 
+      - install -Dm755 select.sh /app/bin/${FLATPAK_ID}
       - install -Dm644 ${FLATPAK_ID}.desktop -t /app/share/applications
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t /app/share/metainfo
-      - install -Dm755 select.sh /app/bin/${FLATPAK_ID}
     sources:
       - type: file
         dest-filename: select.deb
@@ -70,13 +70,13 @@ modules:
         strip-components: 0
 
       - type: file
+        path: select.sh
+
+      - type: file
         path: software.flat.Select.desktop
 
       - type: file
         path: software.flat.Select.metainfo.xml
-
-      - type: file
-        path: select.sh
 
       - type: file
         path: icons/16.png
